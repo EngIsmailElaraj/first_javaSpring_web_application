@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 public class AuthenticactionService {
     public boolean authenticate(String username,String password){
         
-       boolean validUsername = username.equalsIgnoreCase("in28");
-       boolean validPassword = password.equalsIgnoreCase("dummy");
+       boolean validUsername = username.equalsIgnoreCase("ismail");
+       boolean validPassword = password.equalsIgnoreCase("lambo@123");
     return validUsername&&validPassword;
     }
 }
