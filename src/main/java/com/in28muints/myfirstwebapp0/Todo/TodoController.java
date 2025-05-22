@@ -36,7 +36,7 @@ public String ListAllTodos(ModelMap model){
     public String showNewtodoPage(ModelMap model){
            String username = (String) model.get("name");
            Todo todo = new Todo(0,username,"",LocalDate.now().plusYears(1),false);
-            model.put("todo",todo); // so the "todo" is the same in the modalAttrebut in todoDeatils.jsp
+            model.put("todo",todo); // so the "todo" is the same in the modalAttrebut in todoDeatils.jsp .
            return "todoDetails";
 
        }
