@@ -18,9 +18,9 @@
     <body class="bg-gradient-to-br from-green-600 to-emerald-800 min-h-screen flex items-center justify-center font-sans relative overflow-hidden">
 
         <!-- Welcome Card -->
-        <div id="welcomeCard" class="bg-white shadow-2xl rounded-2xl p-10 w-full max-w-md text-center transform scale-90 opacity-0 z-10 relative">
+<div id="welcomeCard" class="bg-white/90 shadow-2xl rounded-2xl p-10 w-full max-w-2xl text-center transform scale-90 opacity-0 z-10 relative">
 
-            <h2 class="text-3xl font-bold text-green-700 mb-6 flex justify-center items-center gap-2">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 flex justify-center items-center gap-2">
                 list_Of_Todos! Willkommen ${name}
                 <span id="plane" class="inline-block w-8 h-8 text-sky-400 opacity-0 origin-center">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
@@ -29,11 +29,7 @@
                 </span>
             </h2>
 
-            <!-- CRUD HERE -->
-            <div class="mb-3">
-                <input type="text" id="todoInput" class="form-control" placeholder="Add new todo">
-                <button class="btn btn-success btn-block mt-2" onclick="addTodo()">Add Todo</button>
-            </div>
+         
 
             <ul class="list-group" id="todoList">
                 <!-- Todos will be added here -->
@@ -52,13 +48,23 @@
                             </tr>
                         </thead>
                                   <c:forEach var="todo" items="${todos}" varStatus="status">
+                                   <tr><td colspan="4"><hr class="my-2 border-gray-400"></td></tr>
+
                                 <tr>
+                                 
                                     <td>${todo.id}</td>
                                     <td>${todo.description}</td>
                                     <td>${todo.targetDate}</td>
                                     <td>${todo.done}</td>
                                 </tr>
                             </c:forEach>
+                                
+                              <div class="d-flex justify-content-center mt-4">
+                                <a href="add-todo" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add Description</a>
+                              </div>
+                              <br>
+                              <hr style="border: none; height: 4px; background-color: #130329;">
+                              <br>
 
                             
 
@@ -77,7 +83,7 @@
                             </div>
                         </li>
                     </template>
-                    <!-- /CRUD -->
+                    
 
                 </div>
 
@@ -109,29 +115,8 @@
                         }
                     });
 
-                    // CRUD JS
-                    function addTodo() {
-                        const text = $('#todoInput').val().trim();
-                        if (text === '')
-                            return;
-
-                        const template = $('#todoTemplate').html();
-                        const $todo = $(template);
-                        $todo.find('.todo-text').text(text);
-
-                        $todo.find('.edit-btn').click(function () {
-                            const newText = prompt("Edit todo:", $todo.find('.todo-text').text());
-                            if (newText)
-                                $todo.find('.todo-text').text(newText);
-                        });
-
-                        $todo.find('.delete-btn').click(function () {
-                            $todo.remove();
-                        });
-
-                        $('#todoList').append($todo);
-                        $('#todoInput').val('');
-                    }
+                  
+                   
                 </script>
 
             </body>
