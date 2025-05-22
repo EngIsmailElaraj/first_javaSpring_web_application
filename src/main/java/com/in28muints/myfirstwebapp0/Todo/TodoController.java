@@ -33,17 +33,19 @@ public String ListAllTodos(ModelMap model){
 
   // post and get
        @RequestMapping(value ="add-todo" ,method = RequestMethod.GET)
-    public String showNewtodoPage(ModelMap model ,Todo todo){
-
-
+    public String showNewtodoPage(ModelMap model){
+           String username = (String) model.get("name");
+           Todo todo = new Todo(0,username,"",LocalDate.now().plusYears(1),false);
+            model.put("todo",todo); // so the "todo" is the same in the modalAttrebut in todoDeatils.jsp
            return "todoDetails";
+
        }
 
        @RequestMapping(value = "add-todo", method = RequestMethod.POST)
     public String addNewTodo(ModelMap model ,Todo todo){
 
-           String usernamee = (String) model.get("name");
-           todoService.addTodo(usernamee,todo.getDescription(), LocalDate.now().plusYears(1),false);
+           String username = (String) model.get("name");
+           todoService.addTodo(username,todo.getDescription(), LocalDate.now().plusYears(1),false);
            return "redirect:say-todo-jsp";
        }
 }

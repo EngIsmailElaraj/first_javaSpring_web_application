@@ -38,11 +38,13 @@
                 <form:form method="post"  modelAttribute="todo">
                     <h1>Enter the Details</h1>
                     
-                    <div class="d-flex align-items-center gap-2">
-                        <label for="desc" class="mb-0">Description:</label>
-                        <form:input type="text" id="desc" required="required" path="description" name="description" class="form-control w-auto" />
+                   <div class="d-flex align-items-center gap-2">
+                       <label for="desc" class="mb-0">Description:</label>
+                       <form:input type="text" id="desc" required="required" path="description" name="description" class="form-control w-auto" />
+                       <form:input type="hidden" path="id" />
+                       <form:input type="hidden" path="done" />
+                   </div>
 
-                    </div>
                 
                     <br />
                     <button type="submit" class="btn btn-success">ok</button>
