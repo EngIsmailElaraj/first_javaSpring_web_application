@@ -26,6 +26,11 @@
           <%= request.getAttribute("errorMessage") %>
         </div>
       <% } %>
+      <div style="background-color: #f1f1f1; border-left: 5px solid #007bff; padding: 10px 15px; margin-bottom: 20px; border-radius: 5px; font-family: sans-serif;">
+        <strong>Test-Zugangsdaten:</strong><br>
+        Benutzername: <code>ismail</code><br>
+        Passwort: <code>123</code>
+      .</div>
 
       <div>
         <label class="block text-sm font-semibold text-gray-700 mb-1">Name</label>
