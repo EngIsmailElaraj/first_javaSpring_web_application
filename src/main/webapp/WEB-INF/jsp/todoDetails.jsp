@@ -36,11 +36,23 @@
                 <!-- Todos will be added here -->
                      
                 <form:form method="post"  modelAttribute="todo">
-                    <h1>Enter the Details</h1>
+                 
                     
                    <div class="d-flex align-items-center gap-2">
+
+                       
                        <label for="desc" class="mb-0">Description:</label>
                        <form:input type="text" id="desc" required="required" path="description" name="description" class="form-control w-auto" />
+                       <form:errors path="description" cssClass="text-warning" />
+
+
+
+
+                    <form:input type="hidden" id="targetDate" path="targetDate" class="form-control w-auto" />
+                    <form:errors path="targetDate" cssClass="text-warning" />
+
+
+                  
                        <form:input type="hidden" path="id" />
                        <form:input type="hidden" path="done" />
                    </div>

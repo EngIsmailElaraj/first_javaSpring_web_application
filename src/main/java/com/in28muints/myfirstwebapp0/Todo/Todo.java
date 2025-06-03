@@ -1,28 +1,42 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.in28muints.myfirstwebapp0.Todo;
 
-import java.time.LocalDate;
+import jakarta.validation.constraints.Size;
+import org.springframework.format.annotation.DateTimeFormat;
 
-/**
- *
- * @author LEGION
- */
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.Locale;
+
+import org.ocpsoft.prettytime.PrettyTime;
+
 public class Todo {
     private int id;
     private String username;
+
+    @Size(min = 5, message = "Enter at least 5 characters")
     private String description;
-    private LocalDate targetDate;
+
     private boolean done;
 
-    public Todo(int id, String username, String description, LocalDate targetDate, boolean done) {
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") // هذا الفورمات يضبط مع datetime input
+    private LocalDateTime targetDate;
+
+    public Todo(int id, String username, String description, LocalDateTime targetDate, boolean done) {
         this.id = id;
         this.username = username;
         this.description = description;
         this.targetDate = targetDate;
         this.done = done;
+    }
+
+
+    public String getPrettyTargetDate() {
+        if (targetDate == null) return "";
+
+        PrettyTime prettyTime = new PrettyTime(Locale.GERMAN); // <-- اللغة الألمانية
+        Date date = Date.from(targetDate.atZone(ZoneId.systemDefault()).toInstant());
+        return prettyTime.format(date);
     }
 
     public int getId() {
@@ -49,17 +63,18 @@ public class Todo {
         this.username = username;
     }
 
-    public LocalDate getTargetDate() {
+    public LocalDateTime getTargetDate() {
         return targetDate;
     }
 
-    public void setTargetDate(LocalDate targetDate) {
+    public void setTargetDate(LocalDateTime targetDate) {
         this.targetDate = targetDate;
     }
 
     @Override
     public String toString() {
-        return "Todo{" + "id=" + id + ", username=" + username + ", description=" + description + ", targetDate=" + targetDate + ", done=" + done + '}';
+        return "Todo{" + "id=" + id + ", username=" + username + ", description=" + description +
+                ", targetDate=" + targetDate + ", done=" + done + '}';
     }
 
     public boolean isDone() {
@@ -69,5 +84,4 @@ public class Todo {
     public void setDone(boolean done) {
         this.done = done;
     }
-    
 }

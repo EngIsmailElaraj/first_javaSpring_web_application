@@ -41,10 +41,12 @@
                   
                         <thead>
                             <tr>
-                                <th>id</th>
+                            
                                 <th>Description</th>
                                 <th>Target Date</th>
                                 <th>Completed</th>
+                                <th> </th>
+                                <th></th>
                             </tr>
                         </thead>
                                   <c:forEach var="todo" items="${todos}" varStatus="status">
@@ -52,10 +54,12 @@
 
                                 <tr>
                                  
-                                    <td>${todo.id}</td>
+                                   
                                     <td>${todo.description}</td>
-                                    <td>${todo.targetDate}</td>
+                                    <td>${todo.prettyTargetDate}</td>
                                     <td>${todo.done}</td>
+                                   <td> <a class="btn btn-danger" href="delete_todo?id=${todo.id}">delete</a></td>
+                                   <td><a class="btn btn-success" href="update-todo?id=${todo.id}">update</a></td>
                                 </tr>
                             </c:forEach>
                                 
