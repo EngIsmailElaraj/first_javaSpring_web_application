@@ -11,11 +11,9 @@
 </head>
 <body class="bg-gradient-to-br from-green-600 to-emerald-800 min-h-screen font-sans">
 
-<!-- Navbar -->
-<nav class="bg-gray-900 text-white shadow-md py-4 px-6 flex justify-between items-center">
-    <h1 class="text-xl font-bold">Aufgabenübersicht</h1>
-    <span class="text-sm">Willkommen, ${name}</span>
-</nav>
+    <%@ include file="/WEB-INF/jsp/includes/header.jsp" %>
+<br>
+<br><br><br>
 
 <!-- Card -->
 <div class="flex justify-center mt-10 px-4">
@@ -61,6 +59,8 @@
         </div>
     </div>
 </div>
+    <%@ include file="/WEB-INF/jsp/includes/footer.jsp" %>
+
 
 <script>
     lucide.createIcons();

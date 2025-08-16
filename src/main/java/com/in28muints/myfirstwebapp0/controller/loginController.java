@@ -8,6 +8,8 @@ import com.in28muints.myfirstwebapp0.login.AuthenticactionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,15 +26,23 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @Controller
 @SessionAttributes("name")
 public class loginController {
-     @Autowired
+     /*@Autowired
      AuthenticactionService authenticactionService ;
-   Logger log = LoggerFactory.getLogger(getClass());
-    @RequestMapping(value ="say-login-jsp" ,method = RequestMethod.GET)
-     public String JspgoToWelcomePage()
+   Logger log = LoggerFactory.getLogger(getClass());*/
+    @RequestMapping(value ="/" ,method = RequestMethod.GET)
+
+     public String JspgoToWelcomePage(ModelMap model)
      {
-     return  "login";
+         model.put("name",getLoggedinUsername());
+     return  "welcome";
      }
-     @RequestMapping(value ="say-login-jsp" ,method = RequestMethod.POST)
+
+     private  String getLoggedinUsername(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication.getName();
+     }
+
+    /* @RequestMapping(value ="say-login-jsp" ,method = RequestMethod.POST)
     public String JspgoToWelcomePage
         (@RequestParam String name,@RequestParam String password, ModelMap model) {
             if (authenticactionService.authenticate(name, password)) {
@@ -44,6 +54,6 @@ public class loginController {
         log.debug("Request param is {}", name);
         // System.out.println("request + "+name);
         return "login";  // يجب أن يتطابق مع اسم ملف hello.jsp
-    }
+    }*/
 
 }

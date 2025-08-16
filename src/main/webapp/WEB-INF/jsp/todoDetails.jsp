@@ -19,13 +19,10 @@
 
   <body class="bg-gradient-to-br from-green-600 to-emerald-800 min-h-screen flex items-center justify-center font-sans relative overflow-hidden pt-20">
 
-  <!-- Navbar -->
-  <nav class="fixed top-0 left-0 w-full bg-gray-900 text-white backdrop-blur-sm text-white shadow-sm z-20">
-    <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-      <h1 class="text-xl font-semibold tracking-wide">Meine Aufgaben</h1>
-        <span class="text-sm">Willkommen, ${name}</span>
-    </div>
-  </nav>
+    <%@ include file="/WEB-INF/jsp/includes/header.jsp" %>
+
+
+
 
 
     <!-- Welcome Card -->

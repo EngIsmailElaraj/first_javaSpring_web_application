@@ -12,6 +12,8 @@ import com.in28muints.myfirstwebapp0.Todo.Todo;
 import com.in28muints.myfirstwebapp0.Todo.TodoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -26,34 +28,37 @@ import org.springframework.web.bind.annotation.SessionAttributes;
  */
 @Controller
 @SessionAttributes("name")
-public class TodoController {
-    @Autowired
-    TodoService todoService ;
-       @RequestMapping("say-todo-jsp")
-public String ListAllTodos(ModelMap model){
-    List<Todo> todos = todoService.findByUsername("in28");
-    model.addAttribute("todos",todos);
-    return "list-todo";  // يجب أن يتطابق مع اسم ملف hello.jsp
-}
+    public class TodoController {
+        @Autowired
+        TodoService todoService ;
+           @RequestMapping("say-todo-jsp")
+    public String ListAllTodos(ModelMap model){
+               String username = getLoggedinUsername(model);
+        List<Todo> todos = todoService.findByUsername(username);
+        model.addAttribute("todos",todos);
+        return "list-todo";  // يجب أن يتطابق مع اسم ملف hello.jsp
+    }
 
   // post and get Adding
        @RequestMapping(value ="add-todo" ,method = RequestMethod.GET)
     public String showNewtodoPage(ModelMap model){
-           String username = (String) model.get("name");
+           String username = getLoggedinUsername(model);
            Todo todo = new Todo(0,username,"way binding validation", LocalDateTime.now(),false);
             model.put("todo",todo); // so the "todo" is the same in the modalAttrebut in todoDeatils.jsp .
            return "todoDetails";
 
        }
 
-               @RequestMapping(value = "add-todo", method = RequestMethod.POST)
+
+
+    @RequestMapping(value = "add-todo", method = RequestMethod.POST)
             public String addNewTodo(ModelMap model, @Valid Todo todo, BindingResult result){
         if (result.hasErrors()){
             return "todoDetails";
         }
 
 
-                   String username = (String) model.get("name");
+                   String username = getLoggedinUsername(model);
            todoService.addTodo(username,todo.getDescription(), LocalDateTime.now(),false);
            return "redirect:say-todo-jsp";
        }
@@ -84,10 +89,15 @@ public String ListAllTodos(ModelMap model){
             return "todoDetails";
         }
 
-        String username = (String) model.get("name");
+        String username = getLoggedinUsername(model);
         todo.setTargetDate(LocalDateTime.now());
         todo.setUsername(username);
         todoService.updateTodo(todo);
         return "redirect:say-todo-jsp";
     }
+
+            private  String getLoggedinUsername(ModelMap model) {
+                Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+                return authentication.getName();
+            }
 }
